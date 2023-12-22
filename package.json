@@ -21,7 +21,7 @@
   "devDependencies": {
     "@types/node": "20.9.0",
     "@types/react": "17.0.38",
-    "prisma": "^5.7.0",
+    "prisma": "^5.7.1",
     "typescript": "^5.3.3"
   }
 }
