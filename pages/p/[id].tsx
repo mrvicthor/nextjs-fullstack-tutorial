@@ -23,6 +23,13 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   };
 };
 
+async function deletePost(id: string): Promise<void> {
+  await fetch(`/api/post/${id}`, {
+    method: "DELETE",
+  });
+  Router.push("/");
+}
+
 async function publishPost(id: string): Promise<void> {
   await fetch(`/api/publish/${id}`, {
     method: "PUT",
@@ -41,7 +48,7 @@ const Post: React.FC<PostProps> = (props) => {
   if (!props.published) {
     title = `${title} (Draft)`;
   }
-
+  console.log(props);
   return (
     <Layout>
       <div>
@@ -50,6 +57,9 @@ const Post: React.FC<PostProps> = (props) => {
         <ReactMarkdown children={props.content} />
         {!props.published && userHasValidSession && postBelongsToUser && (
           <button onClick={() => publishPost(props.id)}>Publish</button>
+        )}
+        {userHasValidSession && postBelongsToUser && (
+          <button onClick={() => deletePost(props.id)}>Delete</button>
         )}
       </div>
       <style jsx>{`
